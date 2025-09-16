@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cris Laurence Benitez - Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/certificate.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="profile-details">
+                <img src="img/profile.jpg" alt="Cris Laurence Benitez" class="profile-pic">
+                <h1>Cris Laurence Benitez</h1>
+                <p>Data Analyst</p>
+                <p>Cavite, Philippines</p>
+                <div class="social-links">
+                <a href="https://www.linkedin.com/in/cris-laurence-benitez-7049a3378/" class="fab fa-linkedin" target="_blank"></a>
+                <a href="https://www.facebook.com/lorensssss1" class="fab fa-facebook-f" target="_blank"></a>
+                <a href="https://www.instagram.com/karisostomo/" class="fab fa-instagram" target="_blank"></a>
+                <a href="https://github.com/1Lorens" class="fab fa-github" target="_blank"></a>
+                <span id="email-copy-btn" class="fa-solid fa-envelope" title="Click to copy email"></span>
+            </div>
+            </div>
+            <div class="skills-summary">
+                <p>I analyze large datasets to understand how users interact with digital products, suggesting improvements based on quantitative insights.</p>
+                <div class="skill-tags">
+                    <span>MS Excel</span>
+                    <span>MySQL</span>
+                    <span>PowerBI</span>
+                    <span>Tableau</span>
+                    <span>Python</span>
+                    <span>Pandas</span>
+                    <span>Data visualization</span>
+                    <span>Statistics</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <aside class="certificates-section">
+                <h2>Certificates</h2>
+                <div class="certificates-grid">
+                    <?php
+                        include 'php/certificates.php';
+                    ?>
+                </div>
+            </aside>
+
+            <section class="projects-section">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <?php
+                        include 'php/projects.php';
+                    ?>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="projectModal" class="project-modal">
+        <div class="project-modal-content">
+            <span class="project-close-btn">&times;</span>
+            <div class="project-modal-header">
+                <h3 id="modal-project-title"></h3>
+            </div>
+            <div class="project-modal-body">
+                <div class="image-section">
+                    <div class="main-image-container">
+                        <img id="modal-main-image" src="" alt="Main Project Image">
+                    </div>
+                    <div class="thumbnail-container" id="modal-thumbnails">
+                    </div>
+                </div>
+                <div class="description-section">
+                    <h3 class="description-heading">Project Description</h3>
+                    <p id="modal-project-desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="certificateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img src="" alt="Enlarged Certificate" id="modal-image">
+            <h4 id="modal-title"></h4>
+            <p id="modal-subtitle"></p>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/certificates.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+</html>

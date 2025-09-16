@@ -1,0 +1,239 @@
+:root {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --secondary-bg: #1e1e1e;
+    --accent-color: #64ffda;
+    --link-color: #8892b0;
+    --project-bg: #222222;
+    --project-border: #333333;
+    --active-pagination: #4CAF50;
+}
+
+/* Fluid Typography: Base font size scales with viewport width */
+html {
+    font-size: clamp(14px, 1.5vw, 18px);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: var(--secondary-bg);
+    padding: 2rem 5%;
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.profile-details h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.profile-details p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: var(--link-color);
+}
+
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a,
+.social-links span {
+    color: var(--link-color);
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.social-links a:hover,
+.social-links span:hover {
+    color: #4CAF50;
+}
+
+.skills-summary {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--project-border);
+}
+
+.skills-summary p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+}
+
+.skill-tags span {
+    display: inline-block;
+    background-color: var(--project-bg);
+    border: 1px solid var(--project-border);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin: 0.5rem 0.5rem 0 0;
+}
+
+.main-content {
+    padding: 2rem 5%;
+}
+
+.container {
+    display: flex;
+    gap: 2rem;
+}
+
+.projects-section {
+    flex: 1;
+    padding-left: 2rem;
+}
+
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.project-item {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--project-border);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 1rem;
+    width: calc(50% - 1rem);
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.project-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.project-item h3 {
+    margin: 0 0 0.5rem;
+}
+
+.project-item p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--link-color);
+}
+
+.project-tags {
+    margin-top: 1rem;
+}
+
+.project-tags span {
+    display: inline-block;
+    background-color: var(--project-bg);
+    border: 1px solid var(--project-border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+}
+
+/* Modal Pop-up Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--secondary-bg);
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid var(--project-border);
+    width: 70%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.modal-content img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 0 auto 1rem;
+    border-radius: 4px;
+}
+
+.modal-content h4, .modal-content p {
+    margin: 0.5rem 0;
+}
+
+.close-btn {
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+/* Responsive design adjustments for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .projects-section {
+        flex: 1;
+        padding-left: 0;
+    }
+
+    .project-item {
+        width: 100%;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
