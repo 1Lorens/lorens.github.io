@@ -138,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     displayCertificates(currentPage);
 
-    // Modal functionality
     const certificateModal = document.getElementById('certificateModal');
     const modalImage = document.getElementById('modal-image');
     const modalTitle = document.getElementById('modal-title');
