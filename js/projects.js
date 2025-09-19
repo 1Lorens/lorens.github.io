@@ -76,15 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMainImage = document.getElementById('modal-main-image');
     const modalThumbnails = document.getElementById('modal-thumbnails');
 
-    projectItems.forEach(item => {
-        item.addEventListener('click', () => {
+    // Use event delegation on the parent container for more robust click handling
+    document.querySelector('.projects-grid').addEventListener('click', (event) => {
+        const item = event.target.closest('.project-item');
+        if (item) {
             const projectIndex = item.dataset.index;
             const project = allProjects[projectIndex];
 
             // Populate the modal with project data
             modalTitle.textContent = project.title;
             modalDesc.textContent = project.description;
-            
+
             // Clear existing thumbnails
             modalThumbnails.innerHTML = '';
 
@@ -98,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const thumbnail = document.createElement('img');
                 thumbnail.src = imgSrc;
                 thumbnail.alt = `Project Image ${index + 1}`;
-                
+
                 const overlay = document.createElement('div');
                 overlay.className = 'thumbnail-overlay';
                 overlay.textContent = 'Selected';
@@ -110,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add click listener to change the main image
                 thumbnailWrapper.addEventListener('click', () => {
                     modalMainImage.src = imgSrc;
-                    
+
                     // Remove 'active' class from all wrappers
                     document.querySelectorAll('.thumbnail-wrapper').forEach(t => t.classList.remove('active'));
                     // Add 'active' class to the clicked wrapper
@@ -121,11 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Set the first image as the main image and active thumbnail by default
             if (project.images.length > 0) {
                 modalMainImage.src = project.images[0];
-                modalThumbnails.querySelector('.thumbnail-wrapper').classList.add('active');
+                const firstThumbnail = modalThumbnails.querySelector('.thumbnail-wrapper');
+                if (firstThumbnail) {
+                    firstThumbnail.classList.add('active');
+                }
             }
 
             modal.style.display = 'flex';
-        });
+        }
     });
 
     // Close the modal when the user clicks on the close button or outside the modal
