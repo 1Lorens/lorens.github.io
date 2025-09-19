@@ -1,83 +1,104 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // This data array holds the information for the full-size modal pop-up.
-    // The 'image' key should point to the path of your full-size certificate images.
-    const certificateData = [
-        {
-            title: 'Analyze Data with Python',
-            subtitle: 'Data Analysis',
-            image: 'img/cert/analyzedata.jpg'
-        },
-        {
-            title: 'Visualize Data with Python',
-            subtitle: 'Data Visualization',
-            image: 'img/cert/VisualizeDataPython.jpg'
-        },
-        {
-            title: 'Basic Statistics with Python',
-            subtitle: 'Statistics',
-            image: 'img/cert/basicstatspython.jpg'
-        },
-        {
-            title: 'Intro to Databases and SQL',
-            subtitle: 'Database Management',
-            image: 'img/cert/IntrotoDBandSQL.jpg'
-        },
-        {
-            title: 'Python Fundamentals',
-            subtitle: 'Programming Basics',
-            image: 'img/cert/pythonfundamentals.jpg'
-        },
-        {
-            title: 'Analyze Data with Python',
-            subtitle: 'Data Analysis',
-            image: 'img/cert/analyzedata.jpg'
-        },
-        {
-            title: 'Python Fundamentals',
-            subtitle: 'Programming Basics',
-            image: 'img/cert/pythonfundamentals.jpg'
-        },
-        {
-            title: 'Visualize Data with Python',
-            subtitle: 'Data Visualization',
-            image: 'img/cert/VisualizeDataPython.jpg'
-        },
-        {
-            title: 'Basic Statistics with Python',
-            subtitle: 'Statistics',
-            image: 'img/cert/basicstatspython.jpg'
-        },
-        {
-            title: 'Intro to Databases and SQL',
-            subtitle: 'Database Management',
-            image: 'img/cert/IntrotoDBandSQL.jpg'
-        }
-    ];
+const allCertificates = [
+    {
+        title: 'Analyze Data with Python',
+        subtitle: 'Data Analysis',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Visualize Data with Python',
+        subtitle: 'Data Visualization',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Basic Statistics with Python',
+        subtitle: 'Statistics',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Intro to Databases and SQL',
+        subtitle: 'Database Management',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Python Fundamentals',
+        subtitle: 'Programming Basics',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Analyze Data with Python',
+        subtitle: 'Data Analysis',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Python Fundamentals',
+        subtitle: 'Programming Basics',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Visualize Data with Python',
+        subtitle: 'Data Visualization',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Basic Statistics with Python',
+        subtitle: 'Statistics',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+    {
+        title: 'Intro to Databases and SQL',
+        subtitle: 'Database Management',
+        image: 'img/cert/GreatLearning.jpg'
+    },
+];
 
+const certificateData = [
+    {
+        title: 'Analyze Data with Python',
+        subtitle: 'Data Analysis',
+        image: 'img/cert/analyzedata.jpg'
+    },
+    {
+        title: 'Visualize Data with Python',
+        subtitle: 'Data Visualization',
+        image: 'img/cert/VisualizeDataPython.jpg'
+    },
+    {
+        title: 'Basic Statistics with Python',
+        subtitle: 'Statistics',
+        image: 'img/cert/basicstatspython.jpg'
+    },
+    {
+        title: 'Intro to Databases and SQL',
+        subtitle: 'Database Management',
+        image: 'img/cert/IntrotoDBandSQL.jpg'
+    },
+    {
+        title: 'Python Fundamentals',
+        subtitle: 'Programming Basics',
+        image: 'img/cert/pythonfundamentals.jpg'
+    }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
     const certificatesPerPage = 5;
     let currentPage = 1;
 
     const certificateContainer = document.getElementById('certificateContainer');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const pageNumbersContainer = document.getElementById('pageNumbers');
-    const modal = document.getElementById('certificateModal');
-    const closeBtn = document.getElementsByClassName('close-btn')[0];
-    const modalImage = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title');
-    const modalSubtitle = document.getElementById('modal-subtitle');
+    const pageNumbersDiv = document.getElementById('pageNumbers');
 
-    function renderCertificates(page) {
+    function displayCertificates(page) {
         certificateContainer.innerHTML = '';
-        const startIndex = (page - 1) * certificatesPerPage;
-        const endIndex = startIndex + certificatesPerPage;
-        const certsToRender = allCertificates.slice(startIndex, endIndex);
+        const start = (page - 1) * certificatesPerPage;
+        const end = start + certificatesPerPage;
+        const certificatesToShow = allCertificates.slice(start, end);
 
-        certsToRender.forEach((cert, index) => {
+        certificatesToShow.forEach((cert, index) => {
             const certItem = document.createElement('div');
             certItem.className = 'certificate-item';
-            certItem.dataset.index = startIndex + index;
-
+            certItem.setAttribute('data-index', start + index);
+            
             certItem.innerHTML = `
                 <div class="certificate-image">
                     <img src="${cert.image}" alt="${cert.title}" class="minimized-cert-img">
@@ -88,49 +109,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             certificateContainer.appendChild(certItem);
-
-            certItem.addEventListener('click', () => {
-                const fullCertData = certificateData[certItem.dataset.index];
-                if (fullCertData) {
-                    modalImage.src = fullCertData.image;
-                    modalTitle.textContent = fullCertData.title;
-                    modalSubtitle.textContent = fullCertData.subtitle;
-                    modal.style.display = 'flex';
-                }
-            });
         });
+
+        updatePaginationControls();
     }
 
-    function renderPageNumbers() {
-        pageNumbersContainer.innerHTML = '';
+    function updatePaginationControls() {
         const totalPages = Math.ceil(allCertificates.length / certificatesPerPage);
-        for (let i = 1; i <= totalPages; i++) {
-            const pageSpan = document.createElement('span');
-            pageSpan.textContent = i;
-            pageSpan.className = 'page-number';
-            if (i === currentPage) {
-                pageSpan.classList.add('active');
-            }
-            pageSpan.addEventListener('click', () => {
-                currentPage = i;
-                renderCertificates(currentPage);
-                renderPageNumbers();
-            });
-            pageNumbersContainer.appendChild(pageSpan);
-        }
         prevBtn.disabled = currentPage === 1;
         nextBtn.disabled = currentPage === totalPages;
+        pageNumbersDiv.textContent = `Page ${currentPage} of ${totalPages}`;
     }
-
-    // Initial render
-    renderCertificates(currentPage);
-    renderPageNumbers();
 
     prevBtn.addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
-            renderCertificates(currentPage);
-            renderPageNumbers();
+            displayCertificates(currentPage);
         }
     });
 
@@ -138,18 +132,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalPages = Math.ceil(allCertificates.length / certificatesPerPage);
         if (currentPage < totalPages) {
             currentPage++;
-            renderCertificates(currentPage);
-            renderPageNumbers();
+            displayCertificates(currentPage);
         }
     });
 
-    closeBtn.onclick = () => {
-        modal.style.display = 'none';
-    };
+    displayCertificates(currentPage);
 
-    window.onclick = (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
+    // Modal functionality
+    const certificateModal = document.getElementById('certificateModal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSubtitle = document.getElementById('modal-subtitle');
+    const closeBtn = document.querySelector('.close-btn');
+
+    certificateContainer.addEventListener('click', (event) => {
+        const certItem = event.target.closest('.certificate-item');
+        if (certItem) {
+            const index = certItem.dataset.index;
+            const cert = certificateData[index];
+            if (cert) {
+                modalImage.src = cert.image;
+                modalImage.alt = cert.title;
+                modalTitle.textContent = cert.title;
+                modalSubtitle.textContent = cert.subtitle;
+                certificateModal.style.display = 'block';
+            }
         }
-    };
+    });
+
+    closeBtn.addEventListener('click', () => {
+        certificateModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === certificateModal) {
+            certificateModal.style.display = 'none';
+        }
+    });
 });
