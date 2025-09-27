@@ -1,4 +1,15 @@
 const allProjects = [
+     {
+        'title': 'Tableau Project',
+        'subtitle': 'Data Visualization of AirBNB using Tableau.',
+        'image': 'img/proj/tableau.jpg',
+        'tags': ['Tableau', 'MS Excel', 'Data Visualization', 'Dashboards'],
+        'description': 'This data analysis project utilizes the **Airbnb dataset** for the **Seattle, Washington market** to provide actionable insights into pricing, revenue, and geographical distribution. The interactive dashboard visualizes key metrics, including the **average listing price by zipcode**, identifying the most and least expensive neighborhoods (e.g., **98104** being among the highest and **98133** among the lowest). A strong positive correlation is demonstrated between the **number of bedrooms and the average listing price**, showing a significant jump from 4 to 5 bedrooms. Furthermore, the analysis tracks the **year-long revenue trend for 2016**, illustrating a general upward trajectory and seasonal fluctuations. This project showcases proficiency in **data visualization**, **geospatial analysis**, **trend identification**, and distilling complex datasets into clear, data-driven narratives to optimize business strategies for hosts and stakeholders.',
+        'images': [
+            'img/proj/tableau.jpg',
+            'img/proj/tableau.jpg'
+        ]
+    },
     {
         'title': 'MS Excel Project',
         'subtitle': 'Data Cleaning and Visualization of Bike Sales.',
@@ -76,17 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMainImage = document.getElementById('modal-main-image');
     const modalThumbnails = document.getElementById('modal-thumbnails');
 
-    // Use event delegation on the parent container for more robust click handling
-    document.querySelector('.projects-grid').addEventListener('click', (event) => {
-        const item = event.target.closest('.project-item');
-        if (item) {
+    projectItems.forEach(item => {
+        item.addEventListener('click', () => {
             const projectIndex = item.dataset.index;
             const project = allProjects[projectIndex];
 
             // Populate the modal with project data
             modalTitle.textContent = project.title;
             modalDesc.textContent = project.description;
-
+            
             // Clear existing thumbnails
             modalThumbnails.innerHTML = '';
 
@@ -100,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const thumbnail = document.createElement('img');
                 thumbnail.src = imgSrc;
                 thumbnail.alt = `Project Image ${index + 1}`;
-
+                
                 const overlay = document.createElement('div');
                 overlay.className = 'thumbnail-overlay';
                 overlay.textContent = 'Selected';
@@ -112,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add click listener to change the main image
                 thumbnailWrapper.addEventListener('click', () => {
                     modalMainImage.src = imgSrc;
-
+                    
                     // Remove 'active' class from all wrappers
                     document.querySelectorAll('.thumbnail-wrapper').forEach(t => t.classList.remove('active'));
                     // Add 'active' class to the clicked wrapper
@@ -123,14 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Set the first image as the main image and active thumbnail by default
             if (project.images.length > 0) {
                 modalMainImage.src = project.images[0];
-                const firstThumbnail = modalThumbnails.querySelector('.thumbnail-wrapper');
-                if (firstThumbnail) {
-                    firstThumbnail.classList.add('active');
-                }
+                modalThumbnails.querySelector('.thumbnail-wrapper').classList.add('active');
             }
 
             modal.style.display = 'flex';
-        }
+        });
     });
 
     // Close the modal when the user clicks on the close button or outside the modal
@@ -144,4 +150,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
