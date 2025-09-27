@@ -24,31 +24,7 @@ const allCertificates = [
         subtitle: 'Programming Basics',
         image: 'img/cert/GreatLearning.jpg'
     },
-    {
-        title: 'Analyze Data with Python',
-        subtitle: 'Data Analysis',
-        image: 'img/cert/GreatLearning.jpg'
-    },
-    {
-        title: 'Python Fundamentals',
-        subtitle: 'Programming Basics',
-        image: 'img/cert/GreatLearning.jpg'
-    },
-    {
-        title: 'Visualize Data with Python',
-        subtitle: 'Data Visualization',
-        image: 'img/cert/GreatLearning.jpg'
-    },
-    {
-        title: 'Basic Statistics with Python',
-        subtitle: 'Statistics',
-        image: 'img/cert/GreatLearning.jpg'
-    },
-    {
-        title: 'Intro to Databases and SQL',
-        subtitle: 'Database Management',
-        image: 'img/cert/GreatLearning.jpg'
-    },
+   
 ];
 
 const certificateData = [
@@ -138,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     displayCertificates(currentPage);
 
+    // Modal functionality
     const certificateModal = document.getElementById('certificateModal');
     const modalImage = document.getElementById('modal-image');
     const modalTitle = document.getElementById('modal-title');
